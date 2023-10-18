@@ -3,7 +3,12 @@ import subprocess
 
 raw_audios = 'data'
 encoded_audios = 'encoded'
-strength = 50
+strength = 50 # this needs to be stored in the DB, also find the upper bound for this strength param
+
+'''
+  if we are doing multiple encodings,
+  then the strength parameter might come handy to identify specific pattern
+'''
 
 mappings = {
   'walmart.mp3': '3c490cdd62f27f36970529a39fac6187',
@@ -28,6 +33,9 @@ for filename in os.listdir(raw_audios):
   stdout, stderr = process.communicate()
 
   if process.returncode == 0:
-    print(f'Success')
+    print(f'{stderr.decode("utf-8")}')
   else:
     print(f'Failed: {stderr.decode("utf-8")}')
+  
+  print()
+  print()
